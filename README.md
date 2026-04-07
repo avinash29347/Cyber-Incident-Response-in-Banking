@@ -180,7 +180,7 @@ Each event includes:
 
 ## 👥 Team
 
-Developed as part of a **national-level hackathon project** with real-world SOC simulation goals.
+Developed as part of a **hackathon project** with real-world SOC simulation goals.
 
 ---
 Deployed link: https://socpipeline-gz4w74iq4-xsullcraser-8273s-projects.vercel.app
