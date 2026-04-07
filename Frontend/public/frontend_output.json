@@ -1,31 +1,31 @@
 {
   "status": "success",
-  "total_events": 6,
+  "total_events": 8,
   "events": [
     {
-      "summary": "Suspicious port_scan from 192.168.1.100 targeting target",
-      "event_id": "1254a46c-cd86-4bf4-94ca-aef258479cbb",
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-1",
+      "event_id": "bdc286fa-790d-4ddd-8476-93209fe5cb65",
       "raw_event": {
-        "timestamp": "2026-04-07T10:00:01Z",
-        "log_type": "network",
-        "source_ip": "192.168.1.100",
-        "destination_ip": "10.0.0.5",
-        "port": 22,
-        "protocol": "tcp",
-        "action": "port_scan",
-        "affected_host": "server-01"
+        "timestamp": "2026-04-07T05:08:11.475Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-1"
       },
       "ingestion": {
-        "timestamp": "2026-04-07T10:00:01Z",
-        "source_ip": "192.168.1.100",
-        "dest_ip": "10.0.0.5",
+        "timestamp": "2026-04-07T05:08:11.475Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
         "src_port": 0,
         "dest_port": 0,
-        "protocol": "tcp",
-        "action": "port_scan",
+        "protocol": null,
+        "action": "file_encryption",
         "bytes_in": 0,
         "bytes_out": 0,
-        "log_family": "network",
+        "log_family": "endpoint",
         "url_path": null,
         "http_method": null,
         "http_status_code": null,
@@ -43,7 +43,7 @@
           "is_off_hours": false
         },
         "behavioral_features": {
-          "deviation_score": 0.5,
+          "deviation_score": 0.85,
           "is_off_hours_for_user": false,
           "is_new_ip_for_user": true,
           "is_new_user": true,
@@ -57,14 +57,14 @@
           "login_failure_spike": false
         },
         "statistical_features": {
-          "z_score": 0.0,
+          "z_score": 2.4,
           "event_count_window": 1
         },
         "frequency_features": {
           "current_window_count": 1,
-          "zscore": 0.0,
-          "percentile_rank": 0.5,
-          "spike_detected": false,
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
           "history_window_count": 0
         },
         "pattern_features": {
@@ -72,25 +72,25 @@
           "brute_force_detected": false,
           "exfiltration_detected": false,
           "lateral_movement_detected": false,
-          "unique_ports_seen": 0,
+          "unique_ports_seen": 1,
           "failed_login_count": 0,
-          "avg_bytes_out": 0.0,
-          "unique_hosts_seen": 0
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
         },
         "network_traffic_features": {
           "traffic_direction": "east_west",
           "src_is_internal": true,
           "dst_is_internal": true,
-          "bytes_ratio": 0.0,
+          "bytes_ratio": 0,
           "dest_port_service": "unknown",
           "is_known_port": false,
           "is_high_risk_port": false,
           "has_tcp_flags": false,
           "tcp_flag_value": null,
           "is_syn_only": false,
-          "packet_count": 0,
-          "duration_ms": 0,
-          "bytes_per_packet": 0.0
+          "packet_count": 357,
+          "duration_ms": 3174,
+          "bytes_per_packet": 1097
         },
         "network_protocol_features": {
           "protocol": "tcp",
@@ -102,167 +102,207 @@
           "protocol_anomaly_detected": false
         },
         "user_profile": {
-          "user_key": "192.168.1.100",
+          "user_key": "10.0.0.77",
           "is_new_user": true,
           "current_hour": 10,
-          "current_source_ip": "192.168.1.100",
+          "current_source_ip": "10.0.0.77",
           "is_new_ip_for_user": true,
           "total_events_seen": 1,
           "failed_login_count": 0,
           "unique_ips_seen": 1,
-          "current_action": "port_scan",
+          "current_action": "file_encryption",
           "current_event_type": "unknown"
         },
         "identity_features": {
           "risky_signin": false
         },
         "classification_scores": {
-          "network": 1,
+          "network": 0,
           "web": 0,
           "iot": 0
         },
         "time_windows": {
-          "timestamp_parsed": "2026-04-07T10:00:01+00:00",
-          "window_1m": "2026-04-07T10:00",
-          "window_5m": "2026-04-07T10:00",
-          "window_15m": "2026-04-07T10:00",
-          "window_1h": "2026-04-07T10:00",
+          "timestamp_parsed": "2026-04-07T05:08:11.475Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
           "hour_of_day": 10,
           "day_of_week": "Tuesday",
           "is_weekend": false,
           "is_off_hours": false,
           "time_of_day": "morning"
         },
-        "log_family": "network"
+        "log_family": "endpoint"
       },
       "detection": {
-        "label": "suspicious",
-        "threat_type": "reconnaissance",
-        "severity": "medium",
-        "confidence": 0.3,
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
         "triggered_engines": [
-          "anomaly"
+          "signature",
+          "anomaly",
+          "ml"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
         ]
       },
       "anomaly_detection": {
-        "anomaly_score": 0.3,
-        "anomaly_level": "low",
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
         "anomaly_flags": [
-          "rare_source_ip",
-          "rare_user_activity"
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
         ]
       },
       "threat_analysis": {
-        "matched_patterns": [],
-        "mapped_pattern": "unknown",
-        "severity": "low",
-        "confidence": 0.0,
-        "reasoning": []
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
       },
       "ioc_enrichment": {
         "observables": {
           "ips": [
-            "192.168.1.100"
+            "10.0.0.77"
           ],
           "domains": [],
           "urls": [],
           "hashes": []
         },
-        "matched": false,
-        "risk_level": "low",
-        "match_count": 0,
-        "matched_iocs": []
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
       },
       "correlation_analysis": {
-        "correlated": false,
-        "correlation_strength": "none",
-        "signal_count": 0,
-        "supporting_signals": [],
-        "reasoning": [],
-        "adjusted_confidence": 0.3
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
       },
       "cis": {
-        "benchmark_id": "CIS-16",
-        "framework": "CIS Controls",
-        "title": "Application Monitoring",
-        "description": "Monitor web application access patterns",
-        "remediation": "Review unusual access attempts to admin endpoints"
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
       },
       "ai_analysis": {
-        "intent": "Port Scanning / Reconnaissance",
-        "summary": "Reconnaissance activity from 192.168.1.100 targeted port 22 on 10.0.0.5.",
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-1 — 1,000 files affected",
+        "one_liner": "Ransomware encrypting workstation-1 — 1,000 files affected",
         "attack_vector": "network",
         "attack_complexity": "low",
         "privileges_required": "none",
         "user_interaction": "none",
-        "scope": "unchanged",
+        "scope": "changed",
         "impact": {
-          "confidentiality": "low",
-          "integrity": "low",
-          "availability": "low"
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
         },
-        "narrative": "The source 192.168.1.100 appears to be performing reconnaissance by probing 22 on 10.0.0.5. This behavior is consistent with service discovery prior to exploitation. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: port scan."
+        "narrative": "CRITICAL: Active ransomware on workstation-1. 1,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
       },
       "cvss": {
         "vector": {
           "AV": "N",
           "AC": "L",
-          "PR": "N",
+          "PR": "L",
           "UI": "N",
-          "C": "L",
-          "I": "L",
-          "A": "L",
-          "S": "U"
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
         },
-        "vector_string": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-        "base_score": 7.3,
-        "severity": "high"
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
       },
       "response": {
         "priority": "P1",
         "recommended_actions": [
-          "Immediately escalate to Incident Response team."
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
         ],
         "containment_steps": [
-          "Block offender IP at edge firewall."
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
         ],
-        "analyst_notes": "The source 192.168.1.100 appears to be performing reconnaissance by probing 22 on 10.0.0.5. This behavior is consistent with service discovery prior to exploitation. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: port scan."
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-1. 1,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
       },
-      "final_report": {},
-      "dashboard": {}
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-1 — 1,000 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-1"
+      }
     },
     {
-      "summary": "Suspicious beaconing from 203.0.113.55 targeting target",
-      "event_id": "2ecc2466-5502-4d65-b35f-1e15f03b870f",
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-2",
+      "event_id": "1097d439-3cd4-45cb-a344-d9dcf1fd3d50",
       "raw_event": {
-        "timestamp": "2026-04-07T10:01:10Z",
-        "log_type": "network",
-        "source_ip": "203.0.113.55",
-        "destination_ip": "10.0.0.8",
-        "port": 443,
-        "protocol": "https",
-        "action": "beaconing",
-        "affected_host": "endpoint-23"
+        "timestamp": "2026-04-07T05:08:11.583Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-2"
       },
       "ingestion": {
-        "timestamp": "2026-04-07T10:01:10Z",
-        "source_ip": "203.0.113.55",
-        "dest_ip": "10.0.0.8",
+        "timestamp": "2026-04-07T05:08:11.583Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
         "src_port": 0,
         "dest_port": 0,
-        "protocol": "https",
-        "action": "beaconing",
+        "protocol": null,
+        "action": "file_encryption",
         "bytes_in": 0,
         "bytes_out": 0,
-        "log_family": "network",
+        "log_family": "endpoint",
         "url_path": null,
         "http_method": null,
         "http_status_code": null,
@@ -280,7 +320,7 @@
           "is_off_hours": false
         },
         "behavioral_features": {
-          "deviation_score": 0.5,
+          "deviation_score": 0.85,
           "is_off_hours_for_user": false,
           "is_new_ip_for_user": true,
           "is_new_user": true,
@@ -294,636 +334,252 @@
           "login_failure_spike": false
         },
         "statistical_features": {
-          "z_score": 0.0,
+          "z_score": 2.4,
           "event_count_window": 1
         },
         "frequency_features": {
           "current_window_count": 1,
-          "zscore": 0.0,
-          "percentile_rank": 0.5,
-          "spike_detected": false,
-          "history_window_count": 1
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
         },
         "pattern_features": {
           "port_scan_detected": false,
           "brute_force_detected": false,
           "exfiltration_detected": false,
           "lateral_movement_detected": false,
-          "unique_ports_seen": 0,
+          "unique_ports_seen": 1,
           "failed_login_count": 0,
-          "avg_bytes_out": 0.0,
-          "unique_hosts_seen": 0
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
         },
         "network_traffic_features": {
-          "traffic_direction": "north_south",
-          "src_is_internal": false,
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
           "dst_is_internal": true,
-          "bytes_ratio": 0.0,
+          "bytes_ratio": 0,
           "dest_port_service": "unknown",
           "is_known_port": false,
           "is_high_risk_port": false,
           "has_tcp_flags": false,
           "tcp_flag_value": null,
           "is_syn_only": false,
-          "packet_count": 0,
-          "duration_ms": 0,
-          "bytes_per_packet": 0.0
+          "packet_count": 499,
+          "duration_ms": 3310,
+          "bytes_per_packet": 126
         },
         "network_protocol_features": {
-          "protocol": "https",
+          "protocol": "tcp",
           "is_protocol_expected": true,
           "is_deprecated_protocol": false,
-          "is_tunneling_capable": true,
+          "is_tunneling_capable": false,
           "is_new_protocol_for_source": true,
           "unique_protocols_for_source": 1,
           "protocol_anomaly_detected": false
         },
         "user_profile": {
-          "user_key": "203.0.113.55",
+          "user_key": "10.0.0.77",
           "is_new_user": true,
           "current_hour": 10,
-          "current_source_ip": "203.0.113.55",
+          "current_source_ip": "10.0.0.77",
           "is_new_ip_for_user": true,
           "total_events_seen": 1,
           "failed_login_count": 0,
           "unique_ips_seen": 1,
-          "current_action": "beaconing",
+          "current_action": "file_encryption",
           "current_event_type": "unknown"
         },
         "identity_features": {
           "risky_signin": false
         },
         "classification_scores": {
-          "network": 1,
+          "network": 0,
           "web": 0,
           "iot": 0
         },
         "time_windows": {
-          "timestamp_parsed": "2026-04-07T10:01:10+00:00",
-          "window_1m": "2026-04-07T10:01",
-          "window_5m": "2026-04-07T10:00",
-          "window_15m": "2026-04-07T10:00",
-          "window_1h": "2026-04-07T10:00",
+          "timestamp_parsed": "2026-04-07T05:08:11.583Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
           "hour_of_day": 10,
           "day_of_week": "Tuesday",
           "is_weekend": false,
           "is_off_hours": false,
           "time_of_day": "morning"
         },
-        "log_family": "network"
+        "log_family": "endpoint"
       },
       "detection": {
-        "label": "suspicious",
-        "threat_type": "suspicious_activity",
-        "severity": "medium",
-        "confidence": 0.3,
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
         "triggered_engines": [
-          "anomaly"
+          "signature",
+          "anomaly",
+          "ml"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
         ]
       },
       "anomaly_detection": {
-        "anomaly_score": 0.3,
-        "anomaly_level": "low",
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
         "anomaly_flags": [
-          "rare_source_ip",
-          "rare_user_activity"
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
         ]
       },
       "threat_analysis": {
-        "matched_patterns": [],
-        "mapped_pattern": "unknown",
-        "severity": "low",
-        "confidence": 0.0,
-        "reasoning": []
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
       },
       "ioc_enrichment": {
         "observables": {
           "ips": [
-            "203.0.113.55"
+            "10.0.0.77"
           ],
           "domains": [],
           "urls": [],
           "hashes": []
         },
-        "matched": false,
-        "risk_level": "low",
-        "match_count": 0,
-        "matched_iocs": []
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
       },
       "correlation_analysis": {
-        "correlated": false,
-        "correlation_strength": "none",
-        "signal_count": 0,
-        "supporting_signals": [],
-        "reasoning": [],
-        "adjusted_confidence": 0.3
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
       },
       "cis": {
-        "benchmark_id": "CIS-16",
-        "framework": "CIS Controls",
-        "title": "Application Monitoring",
-        "description": "Monitor web application access patterns",
-        "remediation": "Review unusual access attempts to admin endpoints"
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
       },
       "ai_analysis": {
-        "intent": "Network Suspicious Activity",
-        "summary": "Suspicious network activity from 203.0.113.55 to 10.0.0.8 over https was detected.",
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-2 — 1,500 files affected",
+        "one_liner": "Ransomware encrypting workstation-2 — 1,500 files affected",
         "attack_vector": "network",
         "attack_complexity": "low",
         "privileges_required": "none",
         "user_interaction": "none",
-        "scope": "unchanged",
+        "scope": "changed",
         "impact": {
-          "confidentiality": "low",
-          "integrity": "low",
-          "availability": "low"
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
         },
-        "narrative": "A suspicious network event was identified involving source 203.0.113.55 and destination 10.0.0.8. The behavior may indicate unauthorized access attempts, abnormal communications, or malicious discovery activity. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: beaconing."
+        "narrative": "CRITICAL: Active ransomware on workstation-2. 1,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
       },
       "cvss": {
         "vector": {
           "AV": "N",
           "AC": "L",
-          "PR": "N",
+          "PR": "L",
           "UI": "N",
-          "C": "L",
-          "I": "L",
-          "A": "L",
-          "S": "U"
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
         },
-        "vector_string": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-        "base_score": 7.3,
-        "severity": "high"
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
       },
       "response": {
         "priority": "P1",
         "recommended_actions": [
-          "Immediately escalate to Incident Response team."
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
         ],
         "containment_steps": [
-          "Block offender IP at edge firewall."
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
         ],
-        "analyst_notes": "A suspicious network event was identified involving source 203.0.113.55 and destination 10.0.0.8. The behavior may indicate unauthorized access attempts, abnormal communications, or malicious discovery activity. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: beaconing."
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-2. 1,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
       },
-      "final_report": {},
-      "dashboard": {}
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-2 — 1,500 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-2"
+      }
     },
     {
-      "summary": "Suspicious suspicious_request from 91.240.118.33 targeting /login?user=admin' OR '1'='1",
-      "event_id": "1c5f448e-82bf-4600-82a6-3dd6cf544c13",
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-3",
+      "event_id": "63bcee19-298b-4255-896c-82ff78fc9781",
       "raw_event": {
-        "timestamp": "2026-04-07T10:02:20Z",
-        "log_type": "web",
-        "source_ip": "91.240.118.33",
-        "url": "/login?user=admin' OR '1'='1",
-        "action": "suspicious_request",
-        "affected_host": "web-server-01"
+        "timestamp": "2026-04-07T05:08:11.683Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-3"
       },
       "ingestion": {
-        "timestamp": "2026-04-07T10:02:20Z",
-        "source_ip": "91.240.118.33",
+        "timestamp": "2026-04-07T05:08:11.683Z",
+        "source_ip": "10.0.0.77",
         "dest_ip": null,
         "src_port": 0,
         "dest_port": 0,
         "protocol": null,
-        "action": "suspicious_request",
+        "action": "file_encryption",
         "bytes_in": 0,
         "bytes_out": 0,
-        "log_family": "web",
-        "url_path": "/login?user=admin' OR '1'='1",
-        "http_method": null,
-        "http_status_code": null,
-        "user_agent": null
-      },
-      "feature_engineering": {
-        "temporal_features": {
-          "event_count_1m": 1,
-          "event_count_5m": 1,
-          "event_count_15m": 1,
-          "event_count_1h": 1,
-          "is_frequency_accelerating": true,
-          "is_first_seen_source": true,
-          "sequence_position_in_1m": 1,
-          "is_off_hours": false
-        },
-        "behavioral_features": {
-          "deviation_score": 0.5,
-          "is_off_hours_for_user": false,
-          "is_new_ip_for_user": true,
-          "is_new_user": true,
-          "excessive_failed_logins": false,
-          "baseline_established": false,
-          "normal_hours_count": 1,
-          "normal_ips_count": 1,
-          "failed_login_count": 0,
-          "rare_source_ip": true,
-          "rare_user_activity": true,
-          "login_failure_spike": false
-        },
-        "statistical_features": {
-          "z_score": 0.0,
-          "event_count_window": 1
-        },
-        "frequency_features": {
-          "current_window_count": 1,
-          "zscore": 0.0,
-          "percentile_rank": 0.5,
-          "spike_detected": false,
-          "history_window_count": 2
-        },
-        "pattern_features": {
-          "port_scan_detected": false,
-          "brute_force_detected": false,
-          "exfiltration_detected": false,
-          "lateral_movement_detected": false,
-          "unique_ports_seen": 0,
-          "failed_login_count": 0,
-          "avg_bytes_out": 0.0,
-          "unique_hosts_seen": 0
-        },
-        "user_profile": {
-          "user_key": "91.240.118.33",
-          "is_new_user": true,
-          "current_hour": 10,
-          "current_source_ip": "91.240.118.33",
-          "is_new_ip_for_user": true,
-          "total_events_seen": 1,
-          "failed_login_count": 0,
-          "unique_ips_seen": 1,
-          "current_action": "suspicious_request",
-          "current_event_type": "unknown"
-        },
-        "identity_features": {
-          "risky_signin": false
-        },
-        "classification_scores": {
-          "network": 0,
-          "web": 0,
-          "iot": 0
-        },
-        "time_windows": {
-          "timestamp_parsed": "2026-04-07T10:02:20+00:00",
-          "window_1m": "2026-04-07T10:02",
-          "window_5m": "2026-04-07T10:00",
-          "window_15m": "2026-04-07T10:00",
-          "window_1h": "2026-04-07T10:00",
-          "hour_of_day": 10,
-          "day_of_week": "Tuesday",
-          "is_weekend": false,
-          "is_off_hours": false,
-          "time_of_day": "morning"
-        },
-        "log_family": "web"
-      },
-      "detection": {
-        "label": "suspicious",
-        "threat_type": "web_attack",
-        "severity": "medium",
-        "confidence": 0.3,
-        "triggered_engines": [
-          "anomaly"
-        ],
-        "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
-        ]
-      },
-      "anomaly_detection": {
-        "anomaly_score": 0.3,
-        "anomaly_level": "low",
-        "anomaly_flags": [
-          "rare_source_ip",
-          "rare_user_activity"
-        ],
-        "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
-        ]
-      },
-      "threat_analysis": {
-        "matched_patterns": [],
-        "mapped_pattern": "unknown",
-        "severity": "low",
-        "confidence": 0.0,
-        "reasoning": []
-      },
-      "ioc_enrichment": {
-        "observables": {
-          "ips": [
-            "91.240.118.33"
-          ],
-          "domains": [],
-          "urls": [
-            "/login?user=admin' or '1'='1"
-          ],
-          "hashes": []
-        },
-        "matched": false,
-        "risk_level": "low",
-        "match_count": 0,
-        "matched_iocs": []
-      },
-      "correlation_analysis": {
-        "correlated": false,
-        "correlation_strength": "none",
-        "signal_count": 0,
-        "supporting_signals": [],
-        "reasoning": [],
-        "adjusted_confidence": 0.3
-      },
-      "cis": {
-        "benchmark_id": "CIS-16",
-        "framework": "CIS Controls",
-        "title": "Application Monitoring",
-        "description": "Monitor web application access patterns",
-        "remediation": "Review unusual access attempts to admin endpoints"
-      },
-      "ai_analysis": {
-        "intent": "Suspicious Web Request",
-        "summary": "Suspicious web request from 91.240.118.33 targeted /login?user=admin' OR '1'='1.",
-        "attack_vector": "network",
-        "attack_complexity": "low",
-        "privileges_required": "none",
-        "user_interaction": "none",
-        "scope": "unchanged",
-        "impact": {
-          "confidentiality": "low",
-          "integrity": "low",
-          "availability": "low"
-        },
-        "narrative": "A suspicious request was sent from 91.240.118.33 to /login?user=admin' OR '1'='1, indicating possible probing or injection-style behavior. The activity may be an attempt to manipulate application input handling or discover exploitable behavior on web-server-01. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: suspicious request."
-      },
-      "cvss": {
-        "vector": {
-          "AV": "N",
-          "AC": "L",
-          "PR": "N",
-          "UI": "N",
-          "C": "L",
-          "I": "L",
-          "A": "L",
-          "S": "U"
-        },
-        "vector_string": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-        "base_score": 7.3,
-        "severity": "high"
-      },
-      "response": {
-        "priority": "P1",
-        "recommended_actions": [
-          "Immediately escalate to Incident Response team."
-        ],
-        "containment_steps": [
-          "Block offender IP at edge firewall."
-        ],
-        "analyst_notes": "A suspicious request was sent from 91.240.118.33 to /login?user=admin' OR '1'='1, indicating possible probing or injection-style behavior. The activity may be an attempt to manipulate application input handling or discover exploitable behavior on web-server-01. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: suspicious request."
-      },
-      "final_report": {},
-      "dashboard": {}
-    },
-    {
-      "summary": "Suspicious web_attack from 185.199.110.153 targeting /admin/upload.php",
-      "event_id": "9fd4dde0-23d4-44e8-86e3-5aadbecf4d85",
-      "raw_event": {
-        "timestamp": "2026-04-07T10:03:30Z",
-        "log_type": "web",
-        "source_ip": "185.199.110.153",
-        "url": "/admin/upload.php",
-        "action": "web_attack",
-        "affected_host": "web-server-02"
-      },
-      "ingestion": {
-        "timestamp": "2026-04-07T10:03:30Z",
-        "source_ip": "185.199.110.153",
-        "dest_ip": null,
-        "src_port": 0,
-        "dest_port": 0,
-        "protocol": null,
-        "action": "web_attack",
-        "bytes_in": 0,
-        "bytes_out": 0,
-        "log_family": "web",
-        "url_path": "/admin/upload.php",
-        "http_method": null,
-        "http_status_code": null,
-        "user_agent": null
-      },
-      "feature_engineering": {
-        "temporal_features": {
-          "event_count_1m": 1,
-          "event_count_5m": 1,
-          "event_count_15m": 1,
-          "event_count_1h": 1,
-          "is_frequency_accelerating": true,
-          "is_first_seen_source": true,
-          "sequence_position_in_1m": 1,
-          "is_off_hours": false
-        },
-        "behavioral_features": {
-          "deviation_score": 0.5,
-          "is_off_hours_for_user": false,
-          "is_new_ip_for_user": true,
-          "is_new_user": true,
-          "excessive_failed_logins": false,
-          "baseline_established": false,
-          "normal_hours_count": 1,
-          "normal_ips_count": 1,
-          "failed_login_count": 0,
-          "rare_source_ip": true,
-          "rare_user_activity": true,
-          "login_failure_spike": false
-        },
-        "statistical_features": {
-          "z_score": 0.0,
-          "event_count_window": 1
-        },
-        "frequency_features": {
-          "current_window_count": 1,
-          "zscore": 0.0,
-          "percentile_rank": 0.5,
-          "spike_detected": false,
-          "history_window_count": 3
-        },
-        "pattern_features": {
-          "port_scan_detected": false,
-          "brute_force_detected": false,
-          "exfiltration_detected": false,
-          "lateral_movement_detected": false,
-          "unique_ports_seen": 0,
-          "failed_login_count": 0,
-          "avg_bytes_out": 0.0,
-          "unique_hosts_seen": 0
-        },
-        "user_profile": {
-          "user_key": "185.199.110.153",
-          "is_new_user": true,
-          "current_hour": 10,
-          "current_source_ip": "185.199.110.153",
-          "is_new_ip_for_user": true,
-          "total_events_seen": 1,
-          "failed_login_count": 0,
-          "unique_ips_seen": 1,
-          "current_action": "web_attack",
-          "current_event_type": "unknown"
-        },
-        "identity_features": {
-          "risky_signin": false
-        },
-        "classification_scores": {
-          "network": 0,
-          "web": 0,
-          "iot": 0
-        },
-        "time_windows": {
-          "timestamp_parsed": "2026-04-07T10:03:30+00:00",
-          "window_1m": "2026-04-07T10:03",
-          "window_5m": "2026-04-07T10:00",
-          "window_15m": "2026-04-07T10:00",
-          "window_1h": "2026-04-07T10:00",
-          "hour_of_day": 10,
-          "day_of_week": "Tuesday",
-          "is_weekend": false,
-          "is_off_hours": false,
-          "time_of_day": "morning"
-        },
-        "log_family": "web"
-      },
-      "detection": {
-        "label": "suspicious",
-        "threat_type": "web_attack",
-        "severity": "medium",
-        "confidence": 0.3,
-        "triggered_engines": [
-          "anomaly"
-        ],
-        "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
-        ]
-      },
-      "anomaly_detection": {
-        "anomaly_score": 0.3,
-        "anomaly_level": "low",
-        "anomaly_flags": [
-          "rare_source_ip",
-          "rare_user_activity"
-        ],
-        "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
-        ]
-      },
-      "threat_analysis": {
-        "matched_patterns": [],
-        "mapped_pattern": "unknown",
-        "severity": "low",
-        "confidence": 0.0,
-        "reasoning": []
-      },
-      "ioc_enrichment": {
-        "observables": {
-          "ips": [
-            "185.199.110.153"
-          ],
-          "domains": [],
-          "urls": [
-            "/admin/upload.php"
-          ],
-          "hashes": []
-        },
-        "matched": false,
-        "risk_level": "low",
-        "match_count": 0,
-        "matched_iocs": []
-      },
-      "correlation_analysis": {
-        "correlated": false,
-        "correlation_strength": "none",
-        "signal_count": 0,
-        "supporting_signals": [],
-        "reasoning": [],
-        "adjusted_confidence": 0.3
-      },
-      "cis": {
-        "benchmark_id": "CIS-16",
-        "framework": "CIS Controls",
-        "title": "Application Monitoring",
-        "description": "Monitor web application access patterns",
-        "remediation": "Review unusual access attempts to admin endpoints"
-      },
-      "ai_analysis": {
-        "intent": "Web Application Attack Attempt",
-        "summary": "Potential web application attack from 185.199.110.153 targeted /admin/upload.php.",
-        "attack_vector": "network",
-        "attack_complexity": "low",
-        "privileges_required": "none",
-        "user_interaction": "none",
-        "scope": "unchanged",
-        "impact": {
-          "confidentiality": "low",
-          "integrity": "low",
-          "availability": "low"
-        },
-        "narrative": "A web-focused attack attempt was identified from 185.199.110.153 against /admin/upload.php on web-server-02. The pattern is consistent with hostile application-layer activity that could lead to unauthorized data access or application misuse if successful. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: web attack."
-      },
-      "cvss": {
-        "vector": {
-          "AV": "N",
-          "AC": "L",
-          "PR": "N",
-          "UI": "N",
-          "C": "L",
-          "I": "L",
-          "A": "L",
-          "S": "U"
-        },
-        "vector_string": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-        "base_score": 7.3,
-        "severity": "high"
-      },
-      "response": {
-        "priority": "P1",
-        "recommended_actions": [
-          "Immediately escalate to Incident Response team."
-        ],
-        "containment_steps": [
-          "Block offender IP at edge firewall."
-        ],
-        "analyst_notes": "A web-focused attack attempt was identified from 185.199.110.153 against /admin/upload.php on web-server-02. The pattern is consistent with hostile application-layer activity that could lead to unauthorized data access or application misuse if successful. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: web attack."
-      },
-      "final_report": {},
-      "dashboard": {}
-    },
-    {
-      "summary": "Suspicious credential_abuse from 192.0.2.45 targeting target",
-      "event_id": "6691f801-db5c-463b-bc6a-3a5dd93670cb",
-      "raw_event": {
-        "timestamp": "2026-04-07T10:04:45Z",
-        "log_type": "iot",
-        "source_ip": "192.0.2.45",
-        "affected_host": "iot-camera-01",
-        "action": "credential_abuse",
-        "protocol": "telnet"
-      },
-      "ingestion": {
-        "timestamp": "2026-04-07T10:04:45Z",
-        "source_ip": "192.0.2.45",
-        "dest_ip": null,
-        "src_port": 0,
-        "dest_port": 0,
-        "protocol": "telnet",
-        "action": "credential_abuse",
-        "bytes_in": 0,
-        "bytes_out": 0,
-        "log_family": "iot",
+        "log_family": "endpoint",
         "url_path": null,
         "http_method": null,
         "http_status_code": null,
@@ -941,7 +597,7 @@
           "is_off_hours": false
         },
         "behavioral_features": {
-          "deviation_score": 0.5,
+          "deviation_score": 0.85,
           "is_off_hours_for_user": false,
           "is_new_ip_for_user": true,
           "is_new_user": true,
@@ -955,210 +611,252 @@
           "login_failure_spike": false
         },
         "statistical_features": {
-          "z_score": 0.0,
+          "z_score": 2.4,
           "event_count_window": 1
         },
         "frequency_features": {
           "current_window_count": 1,
-          "zscore": 0.0,
-          "percentile_rank": 0.5,
-          "spike_detected": false,
-          "history_window_count": 4
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
         },
         "pattern_features": {
           "port_scan_detected": false,
           "brute_force_detected": false,
           "exfiltration_detected": false,
           "lateral_movement_detected": false,
-          "unique_ports_seen": 0,
+          "unique_ports_seen": 1,
           "failed_login_count": 0,
-          "avg_bytes_out": 0.0,
-          "unique_hosts_seen": 0
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
         },
         "network_traffic_features": {
-          "traffic_direction": "external",
-          "src_is_internal": false,
-          "dst_is_internal": false,
-          "bytes_ratio": 0.0,
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
+          "dst_is_internal": true,
+          "bytes_ratio": 0,
           "dest_port_service": "unknown",
           "is_known_port": false,
           "is_high_risk_port": false,
           "has_tcp_flags": false,
           "tcp_flag_value": null,
           "is_syn_only": false,
-          "packet_count": 0,
-          "duration_ms": 0,
-          "bytes_per_packet": 0.0
+          "packet_count": 393,
+          "duration_ms": 2199,
+          "bytes_per_packet": 639
         },
         "network_protocol_features": {
-          "protocol": "telnet",
+          "protocol": "tcp",
           "is_protocol_expected": true,
-          "is_deprecated_protocol": true,
+          "is_deprecated_protocol": false,
           "is_tunneling_capable": false,
           "is_new_protocol_for_source": true,
           "unique_protocols_for_source": 1,
-          "protocol_anomaly_detected": true
+          "protocol_anomaly_detected": false
         },
         "user_profile": {
-          "user_key": "192.0.2.45",
+          "user_key": "10.0.0.77",
           "is_new_user": true,
           "current_hour": 10,
-          "current_source_ip": "192.0.2.45",
+          "current_source_ip": "10.0.0.77",
           "is_new_ip_for_user": true,
           "total_events_seen": 1,
           "failed_login_count": 0,
           "unique_ips_seen": 1,
-          "current_action": "credential_abuse",
+          "current_action": "file_encryption",
           "current_event_type": "unknown"
         },
         "identity_features": {
           "risky_signin": false
         },
         "classification_scores": {
-          "network": 1,
+          "network": 0,
           "web": 0,
           "iot": 0
         },
         "time_windows": {
-          "timestamp_parsed": "2026-04-07T10:04:45+00:00",
-          "window_1m": "2026-04-07T10:04",
-          "window_5m": "2026-04-07T10:00",
-          "window_15m": "2026-04-07T10:00",
-          "window_1h": "2026-04-07T10:00",
+          "timestamp_parsed": "2026-04-07T05:08:11.683Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
           "hour_of_day": 10,
           "day_of_week": "Tuesday",
           "is_weekend": false,
           "is_off_hours": false,
           "time_of_day": "morning"
         },
-        "log_family": "iot"
+        "log_family": "endpoint"
       },
       "detection": {
-        "label": "suspicious",
-        "threat_type": "suspicious_activity",
-        "severity": "medium",
-        "confidence": 0.3,
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
         "triggered_engines": [
-          "anomaly"
+          "signature",
+          "anomaly",
+          "ml"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
         ]
       },
       "anomaly_detection": {
-        "anomaly_score": 0.3,
-        "anomaly_level": "low",
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
         "anomaly_flags": [
-          "rare_source_ip",
-          "rare_user_activity"
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
         ]
       },
       "threat_analysis": {
-        "matched_patterns": [],
-        "mapped_pattern": "unknown",
-        "severity": "low",
-        "confidence": 0.0,
-        "reasoning": []
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
       },
       "ioc_enrichment": {
         "observables": {
           "ips": [
-            "192.0.2.45"
+            "10.0.0.77"
           ],
           "domains": [],
           "urls": [],
           "hashes": []
         },
-        "matched": false,
-        "risk_level": "low",
-        "match_count": 0,
-        "matched_iocs": []
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
       },
       "correlation_analysis": {
-        "correlated": false,
-        "correlation_strength": "none",
-        "signal_count": 0,
-        "supporting_signals": [],
-        "reasoning": [],
-        "adjusted_confidence": 0.3
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
       },
       "cis": {
-        "benchmark_id": "CIS-16",
-        "framework": "CIS Controls",
-        "title": "Application Monitoring",
-        "description": "Monitor web application access patterns",
-        "remediation": "Review unusual access attempts to admin endpoints"
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
       },
       "ai_analysis": {
-        "intent": "IoT Device Threat Activity",
-        "summary": "Suspicious IoT activity was detected involving device iot-camera-01 from source 192.0.2.45.",
-        "attack_vector": "adjacent",
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-3 — 2,000 files affected",
+        "one_liner": "Ransomware encrypting workstation-3 — 2,000 files affected",
+        "attack_vector": "network",
         "attack_complexity": "low",
         "privileges_required": "none",
         "user_interaction": "none",
-        "scope": "unchanged",
+        "scope": "changed",
         "impact": {
-          "confidentiality": "low",
-          "integrity": "low",
-          "availability": "low"
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
         },
-        "narrative": "An anomalous IoT-related event was detected involving iot-camera-01. The activity may reflect device misuse, insecure exposure, or abnormal firmware or communication behavior. IoT incidents are important because compromised devices can become entry points into segmented environments. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: credential abuse."
+        "narrative": "CRITICAL: Active ransomware on workstation-3. 2,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
       },
       "cvss": {
         "vector": {
-          "AV": "A",
+          "AV": "N",
           "AC": "L",
-          "PR": "N",
+          "PR": "L",
           "UI": "N",
-          "C": "L",
-          "I": "L",
-          "A": "L",
-          "S": "U"
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
         },
-        "vector_string": "AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-        "base_score": 6.3,
-        "severity": "medium"
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
       },
       "response": {
-        "priority": "P2",
+        "priority": "P1",
         "recommended_actions": [
-          "Review correlation anomalies."
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
         ],
         "containment_steps": [
-          "Monitor host cautiously before taking action."
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
         ],
-        "analyst_notes": "An anomalous IoT-related event was detected involving iot-camera-01. The activity may reflect device misuse, insecure exposure, or abnormal firmware or communication behavior. IoT incidents are important because compromised devices can become entry points into segmented environments. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: credential abuse."
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-3. 2,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
       },
-      "final_report": {},
-      "dashboard": {}
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-3 — 2,000 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-3"
+      }
     },
     {
-      "summary": "Suspicious lateral_movement from 10.10.1.50 targeting target",
-      "event_id": "263ab638-3bfc-4f33-ae0b-bc58b65afa85",
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-4",
+      "event_id": "6d6fd134-8755-486e-a527-ab404be160a1",
       "raw_event": {
-        "timestamp": "2026-04-07T10:05:55Z",
-        "log_type": "network",
-        "source_ip": "10.10.1.50",
-        "destination_ip": "10.10.1.75",
-        "action": "lateral_movement",
-        "affected_host": "internal-db-01"
+        "timestamp": "2026-04-07T05:08:11.783Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-4"
       },
       "ingestion": {
-        "timestamp": "2026-04-07T10:05:55Z",
-        "source_ip": "10.10.1.50",
-        "dest_ip": "10.10.1.75",
+        "timestamp": "2026-04-07T05:08:11.783Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
         "src_port": 0,
         "dest_port": 0,
         "protocol": null,
-        "action": "lateral_movement",
+        "action": "file_encryption",
         "bytes_in": 0,
         "bytes_out": 0,
-        "log_family": "network",
+        "log_family": "endpoint",
         "url_path": null,
         "http_method": null,
         "http_status_code": null,
@@ -1176,7 +874,7 @@
           "is_off_hours": false
         },
         "behavioral_features": {
-          "deviation_score": 0.5,
+          "deviation_score": 0.85,
           "is_off_hours_for_user": false,
           "is_new_ip_for_user": true,
           "is_new_user": true,
@@ -1190,36 +888,60 @@
           "login_failure_spike": false
         },
         "statistical_features": {
-          "z_score": 0.0,
+          "z_score": 2.4,
           "event_count_window": 1
         },
         "frequency_features": {
           "current_window_count": 1,
-          "zscore": 0.0,
-          "percentile_rank": 0.0,
-          "spike_detected": false,
-          "history_window_count": 5
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
         },
         "pattern_features": {
           "port_scan_detected": false,
           "brute_force_detected": false,
           "exfiltration_detected": false,
           "lateral_movement_detected": false,
-          "unique_ports_seen": 0,
+          "unique_ports_seen": 1,
           "failed_login_count": 0,
-          "avg_bytes_out": 0.0,
-          "unique_hosts_seen": 0
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
+        },
+        "network_traffic_features": {
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
+          "dst_is_internal": true,
+          "bytes_ratio": 0,
+          "dest_port_service": "unknown",
+          "is_known_port": false,
+          "is_high_risk_port": false,
+          "has_tcp_flags": false,
+          "tcp_flag_value": null,
+          "is_syn_only": false,
+          "packet_count": 44,
+          "duration_ms": 4089,
+          "bytes_per_packet": 1233
+        },
+        "network_protocol_features": {
+          "protocol": "tcp",
+          "is_protocol_expected": true,
+          "is_deprecated_protocol": false,
+          "is_tunneling_capable": false,
+          "is_new_protocol_for_source": true,
+          "unique_protocols_for_source": 1,
+          "protocol_anomaly_detected": false
         },
         "user_profile": {
-          "user_key": "10.10.1.50",
+          "user_key": "10.0.0.77",
           "is_new_user": true,
           "current_hour": 10,
-          "current_source_ip": "10.10.1.50",
+          "current_source_ip": "10.0.0.77",
           "is_new_ip_for_user": true,
           "total_events_seen": 1,
           "failed_login_count": 0,
           "unique_ips_seen": 1,
-          "current_action": "lateral_movement",
+          "current_action": "file_encryption",
           "current_event_type": "unknown"
         },
         "identity_features": {
@@ -1231,122 +953,1270 @@
           "iot": 0
         },
         "time_windows": {
-          "timestamp_parsed": "2026-04-07T10:05:55+00:00",
-          "window_1m": "2026-04-07T10:05",
-          "window_5m": "2026-04-07T10:05",
-          "window_15m": "2026-04-07T10:00",
-          "window_1h": "2026-04-07T10:00",
+          "timestamp_parsed": "2026-04-07T05:08:11.783Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
           "hour_of_day": 10,
           "day_of_week": "Tuesday",
           "is_weekend": false,
           "is_off_hours": false,
           "time_of_day": "morning"
         },
-        "log_family": "network"
+        "log_family": "endpoint"
       },
       "detection": {
-        "label": "suspicious",
-        "threat_type": "suspicious_activity",
-        "severity": "medium",
-        "confidence": 0.3,
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
         "triggered_engines": [
-          "anomaly"
+          "signature",
+          "anomaly",
+          "ml"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
         ]
       },
       "anomaly_detection": {
-        "anomaly_score": 0.3,
-        "anomaly_level": "low",
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
         "anomaly_flags": [
-          "rare_source_ip",
-          "rare_user_activity"
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
         ],
         "reasoning": [
-          "Source IP appears unusual for this activity",
-          "User behavior appears unusual"
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
         ]
       },
       "threat_analysis": {
-        "matched_patterns": [],
-        "mapped_pattern": "unknown",
-        "severity": "low",
-        "confidence": 0.0,
-        "reasoning": []
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
       },
       "ioc_enrichment": {
         "observables": {
           "ips": [
-            "10.10.1.50"
+            "10.0.0.77"
           ],
           "domains": [],
           "urls": [],
           "hashes": []
         },
-        "matched": false,
-        "risk_level": "low",
-        "match_count": 0,
-        "matched_iocs": []
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
       },
       "correlation_analysis": {
-        "correlated": false,
-        "correlation_strength": "none",
-        "signal_count": 0,
-        "supporting_signals": [],
-        "reasoning": [],
-        "adjusted_confidence": 0.3
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
       },
       "cis": {
-        "benchmark_id": "CIS-16",
-        "framework": "CIS Controls",
-        "title": "Application Monitoring",
-        "description": "Monitor web application access patterns",
-        "remediation": "Review unusual access attempts to admin endpoints"
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
       },
       "ai_analysis": {
-        "intent": "Network Suspicious Activity",
-        "summary": "Suspicious network activity from 10.10.1.50 to 10.10.1.75 over unknown protocol was detected.",
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-4 — 2,500 files affected",
+        "one_liner": "Ransomware encrypting workstation-4 — 2,500 files affected",
         "attack_vector": "network",
         "attack_complexity": "low",
         "privileges_required": "none",
         "user_interaction": "none",
-        "scope": "unchanged",
+        "scope": "changed",
         "impact": {
-          "confidentiality": "low",
-          "integrity": "low",
-          "availability": "low"
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
         },
-        "narrative": "A suspicious network event was identified involving source 10.10.1.50 and destination 10.10.1.75. The behavior may indicate unauthorized access attempts, abnormal communications, or malicious discovery activity. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: lateral movement."
+        "narrative": "CRITICAL: Active ransomware on workstation-4. 2,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
       },
       "cvss": {
         "vector": {
           "AV": "N",
           "AC": "L",
-          "PR": "N",
+          "PR": "L",
           "UI": "N",
-          "C": "L",
-          "I": "L",
-          "A": "L",
-          "S": "U"
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
         },
-        "vector_string": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
-        "base_score": 7.3,
-        "severity": "high"
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
       },
       "response": {
         "priority": "P1",
         "recommended_actions": [
-          "Immediately escalate to Incident Response team."
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
         ],
         "containment_steps": [
-          "Block offender IP at edge firewall."
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
         ],
-        "analyst_notes": "A suspicious network event was identified involving source 10.10.1.50 and destination 10.10.1.75. The behavior may indicate unauthorized access attempts, abnormal communications, or malicious discovery activity. Relevant control context: Application Monitoring. Observed anomaly indicators: rare_source_ip, rare_user_activity. Observed action: lateral movement."
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-4. 2,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
       },
-      "final_report": {},
-      "dashboard": {}
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-4 — 2,500 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-4"
+      }
+    },
+    {
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-5",
+      "event_id": "2b7fe1bf-6450-4fb2-b91d-53210fa8625c",
+      "raw_event": {
+        "timestamp": "2026-04-07T05:08:11.883Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-5"
+      },
+      "ingestion": {
+        "timestamp": "2026-04-07T05:08:11.883Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
+        "src_port": 0,
+        "dest_port": 0,
+        "protocol": null,
+        "action": "file_encryption",
+        "bytes_in": 0,
+        "bytes_out": 0,
+        "log_family": "endpoint",
+        "url_path": null,
+        "http_method": null,
+        "http_status_code": null,
+        "user_agent": null
+      },
+      "feature_engineering": {
+        "temporal_features": {
+          "event_count_1m": 1,
+          "event_count_5m": 1,
+          "event_count_15m": 1,
+          "event_count_1h": 1,
+          "is_frequency_accelerating": true,
+          "is_first_seen_source": true,
+          "sequence_position_in_1m": 1,
+          "is_off_hours": false
+        },
+        "behavioral_features": {
+          "deviation_score": 0.85,
+          "is_off_hours_for_user": false,
+          "is_new_ip_for_user": true,
+          "is_new_user": true,
+          "excessive_failed_logins": false,
+          "baseline_established": false,
+          "normal_hours_count": 1,
+          "normal_ips_count": 1,
+          "failed_login_count": 0,
+          "rare_source_ip": true,
+          "rare_user_activity": true,
+          "login_failure_spike": false
+        },
+        "statistical_features": {
+          "z_score": 2.4,
+          "event_count_window": 1
+        },
+        "frequency_features": {
+          "current_window_count": 1,
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
+        },
+        "pattern_features": {
+          "port_scan_detected": false,
+          "brute_force_detected": false,
+          "exfiltration_detected": false,
+          "lateral_movement_detected": false,
+          "unique_ports_seen": 1,
+          "failed_login_count": 0,
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
+        },
+        "network_traffic_features": {
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
+          "dst_is_internal": true,
+          "bytes_ratio": 0,
+          "dest_port_service": "unknown",
+          "is_known_port": false,
+          "is_high_risk_port": false,
+          "has_tcp_flags": false,
+          "tcp_flag_value": null,
+          "is_syn_only": false,
+          "packet_count": 78,
+          "duration_ms": 4735,
+          "bytes_per_packet": 671
+        },
+        "network_protocol_features": {
+          "protocol": "tcp",
+          "is_protocol_expected": true,
+          "is_deprecated_protocol": false,
+          "is_tunneling_capable": false,
+          "is_new_protocol_for_source": true,
+          "unique_protocols_for_source": 1,
+          "protocol_anomaly_detected": false
+        },
+        "user_profile": {
+          "user_key": "10.0.0.77",
+          "is_new_user": true,
+          "current_hour": 10,
+          "current_source_ip": "10.0.0.77",
+          "is_new_ip_for_user": true,
+          "total_events_seen": 1,
+          "failed_login_count": 0,
+          "unique_ips_seen": 1,
+          "current_action": "file_encryption",
+          "current_event_type": "unknown"
+        },
+        "identity_features": {
+          "risky_signin": false
+        },
+        "classification_scores": {
+          "network": 0,
+          "web": 0,
+          "iot": 0
+        },
+        "time_windows": {
+          "timestamp_parsed": "2026-04-07T05:08:11.883Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
+          "hour_of_day": 10,
+          "day_of_week": "Tuesday",
+          "is_weekend": false,
+          "is_off_hours": false,
+          "time_of_day": "morning"
+        },
+        "log_family": "endpoint"
+      },
+      "detection": {
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "triggered_engines": [
+          "signature",
+          "anomaly",
+          "ml"
+        ],
+        "reasoning": [
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
+        ]
+      },
+      "anomaly_detection": {
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
+        "anomaly_flags": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
+        ],
+        "reasoning": [
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
+        ]
+      },
+      "threat_analysis": {
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
+      },
+      "ioc_enrichment": {
+        "observables": {
+          "ips": [
+            "10.0.0.77"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
+      },
+      "correlation_analysis": {
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
+      },
+      "cis": {
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
+      },
+      "ai_analysis": {
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-5 — 3,000 files affected",
+        "one_liner": "Ransomware encrypting workstation-5 — 3,000 files affected",
+        "attack_vector": "network",
+        "attack_complexity": "low",
+        "privileges_required": "none",
+        "user_interaction": "none",
+        "scope": "changed",
+        "impact": {
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
+        },
+        "narrative": "CRITICAL: Active ransomware on workstation-5. 3,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
+      },
+      "cvss": {
+        "vector": {
+          "AV": "N",
+          "AC": "L",
+          "PR": "L",
+          "UI": "N",
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
+        },
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 9.5,
+        "severity": "critical"
+      },
+      "response": {
+        "priority": "P1",
+        "recommended_actions": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ],
+        "containment_steps": [
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
+        ],
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-5. 3,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
+      },
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-5 — 3,000 files affected",
+        "severity": "critical",
+        "cvss_score": 9.5,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-5"
+      }
+    },
+    {
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-6",
+      "event_id": "14570f4c-76e2-4353-aadb-b1f271ca0ddc",
+      "raw_event": {
+        "timestamp": "2026-04-07T05:08:11.983Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-6"
+      },
+      "ingestion": {
+        "timestamp": "2026-04-07T05:08:11.983Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
+        "src_port": 0,
+        "dest_port": 0,
+        "protocol": null,
+        "action": "file_encryption",
+        "bytes_in": 0,
+        "bytes_out": 0,
+        "log_family": "endpoint",
+        "url_path": null,
+        "http_method": null,
+        "http_status_code": null,
+        "user_agent": null
+      },
+      "feature_engineering": {
+        "temporal_features": {
+          "event_count_1m": 1,
+          "event_count_5m": 1,
+          "event_count_15m": 1,
+          "event_count_1h": 1,
+          "is_frequency_accelerating": true,
+          "is_first_seen_source": true,
+          "sequence_position_in_1m": 1,
+          "is_off_hours": false
+        },
+        "behavioral_features": {
+          "deviation_score": 0.85,
+          "is_off_hours_for_user": false,
+          "is_new_ip_for_user": true,
+          "is_new_user": true,
+          "excessive_failed_logins": false,
+          "baseline_established": false,
+          "normal_hours_count": 1,
+          "normal_ips_count": 1,
+          "failed_login_count": 0,
+          "rare_source_ip": true,
+          "rare_user_activity": true,
+          "login_failure_spike": false
+        },
+        "statistical_features": {
+          "z_score": 2.4,
+          "event_count_window": 1
+        },
+        "frequency_features": {
+          "current_window_count": 1,
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
+        },
+        "pattern_features": {
+          "port_scan_detected": false,
+          "brute_force_detected": false,
+          "exfiltration_detected": false,
+          "lateral_movement_detected": false,
+          "unique_ports_seen": 1,
+          "failed_login_count": 0,
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
+        },
+        "network_traffic_features": {
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
+          "dst_is_internal": true,
+          "bytes_ratio": 0,
+          "dest_port_service": "unknown",
+          "is_known_port": false,
+          "is_high_risk_port": false,
+          "has_tcp_flags": false,
+          "tcp_flag_value": null,
+          "is_syn_only": false,
+          "packet_count": 329,
+          "duration_ms": 4654,
+          "bytes_per_packet": 113
+        },
+        "network_protocol_features": {
+          "protocol": "tcp",
+          "is_protocol_expected": true,
+          "is_deprecated_protocol": false,
+          "is_tunneling_capable": false,
+          "is_new_protocol_for_source": true,
+          "unique_protocols_for_source": 1,
+          "protocol_anomaly_detected": false
+        },
+        "user_profile": {
+          "user_key": "10.0.0.77",
+          "is_new_user": true,
+          "current_hour": 10,
+          "current_source_ip": "10.0.0.77",
+          "is_new_ip_for_user": true,
+          "total_events_seen": 1,
+          "failed_login_count": 0,
+          "unique_ips_seen": 1,
+          "current_action": "file_encryption",
+          "current_event_type": "unknown"
+        },
+        "identity_features": {
+          "risky_signin": false
+        },
+        "classification_scores": {
+          "network": 0,
+          "web": 0,
+          "iot": 0
+        },
+        "time_windows": {
+          "timestamp_parsed": "2026-04-07T05:08:11.983Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
+          "hour_of_day": 10,
+          "day_of_week": "Tuesday",
+          "is_weekend": false,
+          "is_off_hours": false,
+          "time_of_day": "morning"
+        },
+        "log_family": "endpoint"
+      },
+      "detection": {
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "triggered_engines": [
+          "signature",
+          "anomaly",
+          "ml"
+        ],
+        "reasoning": [
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
+        ]
+      },
+      "anomaly_detection": {
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
+        "anomaly_flags": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
+        ],
+        "reasoning": [
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
+        ]
+      },
+      "threat_analysis": {
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
+      },
+      "ioc_enrichment": {
+        "observables": {
+          "ips": [
+            "10.0.0.77"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
+      },
+      "correlation_analysis": {
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
+      },
+      "cis": {
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
+      },
+      "ai_analysis": {
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-6 — 3,500 files affected",
+        "one_liner": "Ransomware encrypting workstation-6 — 3,500 files affected",
+        "attack_vector": "network",
+        "attack_complexity": "low",
+        "privileges_required": "none",
+        "user_interaction": "none",
+        "scope": "changed",
+        "impact": {
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
+        },
+        "narrative": "CRITICAL: Active ransomware on workstation-6. 3,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
+      },
+      "cvss": {
+        "vector": {
+          "AV": "N",
+          "AC": "L",
+          "PR": "L",
+          "UI": "N",
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
+        },
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
+      },
+      "response": {
+        "priority": "P1",
+        "recommended_actions": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ],
+        "containment_steps": [
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
+        ],
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-6. 3,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
+      },
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-6 — 3,500 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-6"
+      }
+    },
+    {
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-7",
+      "event_id": "272f969d-07bc-4dac-b1ba-a9694afe3ecc",
+      "raw_event": {
+        "timestamp": "2026-04-07T05:08:12.083Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-7"
+      },
+      "ingestion": {
+        "timestamp": "2026-04-07T05:08:12.083Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
+        "src_port": 0,
+        "dest_port": 0,
+        "protocol": null,
+        "action": "file_encryption",
+        "bytes_in": 0,
+        "bytes_out": 0,
+        "log_family": "endpoint",
+        "url_path": null,
+        "http_method": null,
+        "http_status_code": null,
+        "user_agent": null
+      },
+      "feature_engineering": {
+        "temporal_features": {
+          "event_count_1m": 1,
+          "event_count_5m": 1,
+          "event_count_15m": 1,
+          "event_count_1h": 1,
+          "is_frequency_accelerating": true,
+          "is_first_seen_source": true,
+          "sequence_position_in_1m": 1,
+          "is_off_hours": false
+        },
+        "behavioral_features": {
+          "deviation_score": 0.85,
+          "is_off_hours_for_user": false,
+          "is_new_ip_for_user": true,
+          "is_new_user": true,
+          "excessive_failed_logins": false,
+          "baseline_established": false,
+          "normal_hours_count": 1,
+          "normal_ips_count": 1,
+          "failed_login_count": 0,
+          "rare_source_ip": true,
+          "rare_user_activity": true,
+          "login_failure_spike": false
+        },
+        "statistical_features": {
+          "z_score": 2.4,
+          "event_count_window": 1
+        },
+        "frequency_features": {
+          "current_window_count": 1,
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
+        },
+        "pattern_features": {
+          "port_scan_detected": false,
+          "brute_force_detected": false,
+          "exfiltration_detected": false,
+          "lateral_movement_detected": false,
+          "unique_ports_seen": 1,
+          "failed_login_count": 0,
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
+        },
+        "network_traffic_features": {
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
+          "dst_is_internal": true,
+          "bytes_ratio": 0,
+          "dest_port_service": "unknown",
+          "is_known_port": false,
+          "is_high_risk_port": false,
+          "has_tcp_flags": false,
+          "tcp_flag_value": null,
+          "is_syn_only": false,
+          "packet_count": 114,
+          "duration_ms": 543,
+          "bytes_per_packet": 1355
+        },
+        "network_protocol_features": {
+          "protocol": "tcp",
+          "is_protocol_expected": true,
+          "is_deprecated_protocol": false,
+          "is_tunneling_capable": false,
+          "is_new_protocol_for_source": true,
+          "unique_protocols_for_source": 1,
+          "protocol_anomaly_detected": false
+        },
+        "user_profile": {
+          "user_key": "10.0.0.77",
+          "is_new_user": true,
+          "current_hour": 10,
+          "current_source_ip": "10.0.0.77",
+          "is_new_ip_for_user": true,
+          "total_events_seen": 1,
+          "failed_login_count": 0,
+          "unique_ips_seen": 1,
+          "current_action": "file_encryption",
+          "current_event_type": "unknown"
+        },
+        "identity_features": {
+          "risky_signin": false
+        },
+        "classification_scores": {
+          "network": 0,
+          "web": 0,
+          "iot": 0
+        },
+        "time_windows": {
+          "timestamp_parsed": "2026-04-07T05:08:12.083Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
+          "hour_of_day": 10,
+          "day_of_week": "Tuesday",
+          "is_weekend": false,
+          "is_off_hours": false,
+          "time_of_day": "morning"
+        },
+        "log_family": "endpoint"
+      },
+      "detection": {
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "triggered_engines": [
+          "signature",
+          "anomaly",
+          "ml"
+        ],
+        "reasoning": [
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
+        ]
+      },
+      "anomaly_detection": {
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
+        "anomaly_flags": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
+        ],
+        "reasoning": [
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
+        ]
+      },
+      "threat_analysis": {
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
+      },
+      "ioc_enrichment": {
+        "observables": {
+          "ips": [
+            "10.0.0.77"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
+      },
+      "correlation_analysis": {
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
+      },
+      "cis": {
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
+      },
+      "ai_analysis": {
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-7 — 4,000 files affected",
+        "one_liner": "Ransomware encrypting workstation-7 — 4,000 files affected",
+        "attack_vector": "network",
+        "attack_complexity": "low",
+        "privileges_required": "none",
+        "user_interaction": "none",
+        "scope": "changed",
+        "impact": {
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
+        },
+        "narrative": "CRITICAL: Active ransomware on workstation-7. 4,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
+      },
+      "cvss": {
+        "vector": {
+          "AV": "N",
+          "AC": "L",
+          "PR": "L",
+          "UI": "N",
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
+        },
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
+      },
+      "response": {
+        "priority": "P1",
+        "recommended_actions": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ],
+        "containment_steps": [
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
+        ],
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-7. 4,000 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
+      },
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-7 — 4,000 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-7"
+      }
+    },
+    {
+      "summary": "Suspicious file_encryption from 10.0.0.77 targeting workstation-8",
+      "event_id": "c70a15d6-114b-46f1-8703-e549dd2dc77b",
+      "raw_event": {
+        "timestamp": "2026-04-07T05:08:12.183Z",
+        "log_type": "endpoint",
+        "source_ip": "10.0.0.77",
+        "destination_ip": null,
+        "port": null,
+        "protocol": null,
+        "action": "file_encryption",
+        "affected_host": "workstation-8"
+      },
+      "ingestion": {
+        "timestamp": "2026-04-07T05:08:12.183Z",
+        "source_ip": "10.0.0.77",
+        "dest_ip": null,
+        "src_port": 0,
+        "dest_port": 0,
+        "protocol": null,
+        "action": "file_encryption",
+        "bytes_in": 0,
+        "bytes_out": 0,
+        "log_family": "endpoint",
+        "url_path": null,
+        "http_method": null,
+        "http_status_code": null,
+        "user_agent": null
+      },
+      "feature_engineering": {
+        "temporal_features": {
+          "event_count_1m": 1,
+          "event_count_5m": 1,
+          "event_count_15m": 1,
+          "event_count_1h": 1,
+          "is_frequency_accelerating": true,
+          "is_first_seen_source": true,
+          "sequence_position_in_1m": 1,
+          "is_off_hours": false
+        },
+        "behavioral_features": {
+          "deviation_score": 0.85,
+          "is_off_hours_for_user": false,
+          "is_new_ip_for_user": true,
+          "is_new_user": true,
+          "excessive_failed_logins": false,
+          "baseline_established": false,
+          "normal_hours_count": 1,
+          "normal_ips_count": 1,
+          "failed_login_count": 0,
+          "rare_source_ip": true,
+          "rare_user_activity": true,
+          "login_failure_spike": false
+        },
+        "statistical_features": {
+          "z_score": 2.4,
+          "event_count_window": 1
+        },
+        "frequency_features": {
+          "current_window_count": 1,
+          "zscore": 2.4,
+          "percentile_rank": 0.97,
+          "spike_detected": true,
+          "history_window_count": 0
+        },
+        "pattern_features": {
+          "port_scan_detected": false,
+          "brute_force_detected": false,
+          "exfiltration_detected": false,
+          "lateral_movement_detected": false,
+          "unique_ports_seen": 1,
+          "failed_login_count": 0,
+          "avg_bytes_out": 0,
+          "unique_hosts_seen": 1
+        },
+        "network_traffic_features": {
+          "traffic_direction": "east_west",
+          "src_is_internal": true,
+          "dst_is_internal": true,
+          "bytes_ratio": 0,
+          "dest_port_service": "unknown",
+          "is_known_port": false,
+          "is_high_risk_port": false,
+          "has_tcp_flags": false,
+          "tcp_flag_value": null,
+          "is_syn_only": false,
+          "packet_count": 412,
+          "duration_ms": 4605,
+          "bytes_per_packet": 756
+        },
+        "network_protocol_features": {
+          "protocol": "tcp",
+          "is_protocol_expected": true,
+          "is_deprecated_protocol": false,
+          "is_tunneling_capable": false,
+          "is_new_protocol_for_source": true,
+          "unique_protocols_for_source": 1,
+          "protocol_anomaly_detected": false
+        },
+        "user_profile": {
+          "user_key": "10.0.0.77",
+          "is_new_user": true,
+          "current_hour": 10,
+          "current_source_ip": "10.0.0.77",
+          "is_new_ip_for_user": true,
+          "total_events_seen": 1,
+          "failed_login_count": 0,
+          "unique_ips_seen": 1,
+          "current_action": "file_encryption",
+          "current_event_type": "unknown"
+        },
+        "identity_features": {
+          "risky_signin": false
+        },
+        "classification_scores": {
+          "network": 0,
+          "web": 0,
+          "iot": 0
+        },
+        "time_windows": {
+          "timestamp_parsed": "2026-04-07T05:08:12.183Z",
+          "window_1m": "2026-04-07T05:08",
+          "window_5m": "2026-04-07T05:08",
+          "window_15m": "2026-04-07T05:08",
+          "window_1h": "2026-04-07T05:00",
+          "hour_of_day": 10,
+          "day_of_week": "Tuesday",
+          "is_weekend": false,
+          "is_off_hours": false,
+          "time_of_day": "morning"
+        },
+        "log_family": "endpoint"
+      },
+      "detection": {
+        "label": "malicious",
+        "threat_type": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "triggered_engines": [
+          "signature",
+          "anomaly",
+          "ml"
+        ],
+        "reasoning": [
+          "High-confidence ransomware pattern detected",
+          "Source IP has no legitimate baseline",
+          "Anomaly flag: mass_file_encryption"
+        ]
+      },
+      "anomaly_detection": {
+        "anomaly_score": 0.99,
+        "anomaly_level": "critical",
+        "anomaly_flags": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing",
+          "rapid_file_changes"
+        ],
+        "reasoning": [
+          "Detected: mass file encryption",
+          "Detected: ransomware extension detected",
+          "Detected: process hollowing",
+          "Detected: rapid file changes"
+        ]
+      },
+      "threat_analysis": {
+        "matched_patterns": [
+          "ransomware"
+        ],
+        "mapped_pattern": "ransomware",
+        "severity": "critical",
+        "confidence": 0.99,
+        "reasoning": [
+          "Pattern matches ransomware TTP"
+        ]
+      },
+      "ioc_enrichment": {
+        "observables": {
+          "ips": [
+            "10.0.0.77"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "matched": true,
+        "risk_level": "critical",
+        "match_count": 1,
+        "matched_iocs": [
+          "10.0.0.77"
+        ]
+      },
+      "correlation_analysis": {
+        "correlated": true,
+        "correlation_strength": "strong",
+        "signal_count": 3,
+        "supporting_signals": [
+          "mass_file_encryption",
+          "ransomware_extension_detected",
+          "process_hollowing"
+        ],
+        "reasoning": [
+          "Multiple correlated signals detected in same time window"
+        ],
+        "adjusted_confidence": 1
+      },
+      "cis": {
+        "benchmark_id": "CIS-11",
+        "framework": "CIS Controls v8",
+        "title": "Data Recovery",
+        "description": "Restore assets from immutable backups after ransomware",
+        "remediation": "Shut down affected systems. Restore from offline backups. Do NOT pay ransom without legal guidance."
+      },
+      "ai_analysis": {
+        "intent": "Active Ransomware — Mass File Encryption",
+        "summary": "Ransomware encrypting workstation-8 — 4,500 files affected",
+        "one_liner": "Ransomware encrypting workstation-8 — 4,500 files affected",
+        "attack_vector": "network",
+        "attack_complexity": "low",
+        "privileges_required": "none",
+        "user_interaction": "none",
+        "scope": "changed",
+        "impact": {
+          "confidentiality": "high",
+          "integrity": "high",
+          "availability": "high"
+        },
+        "narrative": "CRITICAL: Active ransomware on workstation-8. 4,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance.",
+        "next_steps": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ]
+      },
+      "cvss": {
+        "vector": {
+          "AV": "N",
+          "AC": "L",
+          "PR": "L",
+          "UI": "N",
+          "S": "C",
+          "C": "H",
+          "I": "H",
+          "A": "H"
+        },
+        "vector_string": "AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+        "base_score": 10,
+        "severity": "critical"
+      },
+      "response": {
+        "priority": "P1",
+        "recommended_actions": [
+          "IMMEDIATELY shut down all affected workstations",
+          "Disconnect from network",
+          "Activate BCP",
+          "Engage IR team"
+        ],
+        "containment_steps": [
+          "Power off encrypting workstations",
+          "Isolate network segment",
+          "Restore from offline backups"
+        ],
+        "analyst_notes": "CRITICAL: Active ransomware on workstation-8. 4,500 files encrypted with .locked extension. Process: svchost.exe (hollowed). Coordinated attack across 8 endpoints (MITRE T1486). Shut down affected systems immediately. Do NOT pay ransom without legal guidance."
+      },
+      "final_report": {
+        "owner": "SOC Tier-2",
+        "status": "open"
+      },
+      "dashboard": {
+        "alert_title": "Ransomware encrypting workstation-8 — 4,500 files affected",
+        "severity": "critical",
+        "cvss_score": 10,
+        "source_ip": "10.0.0.77",
+        "affected_user": "workstation-8"
+      }
     }
   ]
 }
