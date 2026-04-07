@@ -1,7 +1,4 @@
-Here’s a **clean, professional GitHub README** tailored for your SOC pipeline project 👇
-You can copy-paste this directly into `README.md`.
 
----
 
 # 🚨 AI-Driven SOC Pipeline
 
